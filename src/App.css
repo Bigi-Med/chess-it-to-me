@@ -1,3 +1,25 @@
-.page{
+.global{
+    background-color: darkgray;
+}
+.board{
     display:flex;
+}
+ .page{
+    display: flex;
+    justify-content: space-between;
+ }
+ .boardEvalBar{
+    display: flex;   
+    margin-left:3%        
+ }
+
+.board{
+    order:2   
+}
+.evalBar{
+    order:1;
+    margin-right:8%
+}
+.import{
+    order:3
 }
