@@ -12,36 +12,36 @@ export default function App() {
     const [heightB, setHeightB] = useState(250);
     const [valueW, setValueW] = useState("0.0");
     const [valueB, setValueB] = useState("");
-    const whitePawns = Array.from({ length: 8 }, (_, i) => [i, 6]);
-    const blackPawns = Array.from({ length: 8 }, (_, i) => [i, 1]);
-    const whiteRook = [
-        [0, 7],
-        [7, 7],
-    ];
-    const blackRook = [
+    const [whiteRook, setWhiteRook] = useState([
+        [0,7],
+        [7,7]
+    ]);
+    const [whitePawns,setWhitePawn] = useState(Array.from({ length: 8 }, (_, i) => [i, 6]));
+    const [blackPawns,setBlackPawn] = useState(Array.from({ length: 8 }, (_, i) => [i, 6]));
+    const [blackRook, setblackRook ] = useState( [
         [0, 0],
         [7, 0],
-    ];
-    const blackBishop = [
+    ]);
+    const [blackBishop, setblackBishop ] = useState( [
         [1, 0],
         [6, 0],
-    ];
-    const whiteBishop = [
+    ]);
+    const [whiteBishop, setwhiteBishop ] = useState( [
         [1, 7],
         [6, 7],
-    ];
-    const whiteKnight = [
+    ]);
+    const [whiteKnight, setwhiteKnight ] = useState( [
         [5, 7],
         [2, 7],
-    ];
-    const blackKnight = [
+    ]);
+    const [blackKnight, setblackKnight ] = useState( [
         [2, 0],
         [5, 0],
-    ];
-    const blackKing = [4, 0];
-    const whiteKing = [4, 7];
-    const blackQueen = [3, 0];
-    const whiteQueen = [3, 7];
+    ]);
+    const [blackKing , setblackKing] = useState([4, 0]);
+    const [whiteKing, setwhiteKing] = useState([4, 7]);
+    const [blackQueen , setblackQueen] = useState([3, 0]);
+    const [whiteQueen , setwhiteQueen] = useState([3, 7]);
 
     const createBoard = () => {
         const rows = 8;
@@ -178,6 +178,13 @@ export default function App() {
 
         return boardClmn;
     };
+
+    const changeRook = () => {
+        setWhiteRook([
+            [0,5],
+            [7,7]
+        ])
+    };
     const generateEvalBar = () => {
         var stockyBoi = getStockFish();
         const stockyLenght = stockyBoi.length;
@@ -246,6 +253,10 @@ export default function App() {
                     <div>
                         <button onClick={generateEvalBar} />
                         Change Bar
+                    </div>
+                    <div>
+                        <button onClick={changeRook} />
+                        Change Rook
                     </div>
                 </div>
             </div>
