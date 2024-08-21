@@ -24,12 +24,18 @@ export async function getEval() {
     }
 
     for (let i = 0; i < fenList.length; i++) {
-        const response = await fetch(ENDPOINT + `fen=${fenList[i]}&depth=15`);
-        var jasonation;
+        let response
+        let jasonation;
+
+        try{
+         response = await fetch(ENDPOINT + `fen=${fenList[i]}&depth=15`);    
+        }catch{
+            console.log("Fetch Error : " +  response)
+        }
         try {
             jasonation = await response.json();
         } catch (error) {
-            console.log(error);
+            console.log("Json Error : " + error);
         }
         _stockFishEval.push(jasonation);
     }

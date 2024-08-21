@@ -1,0 +1,3 @@
+function fenToMove(previousFen, currentFen){
+    
+}
