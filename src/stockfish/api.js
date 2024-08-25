@@ -4,9 +4,10 @@ const REGEX = /\s[0-9]+\.\s|[0-9]+\.\s/;
 const REGEX_INT = /\s/;
 
 var stockFishEval = [];
+var chess = new Chess();
 export async function getEval() {
     console.log("contactin stockfis");
-    var _stockFishEval = []
+    var _stockFishEval = [];
     var moves = [];
     var pgn =
         "1. e4 Nf6 2. d3 e5 3. f3 d5 4. Nc3 Bc5 5. Nh3 Nh5 6. Be2 Qh4+ 7. Kf1 Bxh3 8. gxh3 Qf2# 0-1";
@@ -24,13 +25,13 @@ export async function getEval() {
     }
 
     for (let i = 0; i < fenList.length; i++) {
-        let response
+        let response;
         let jasonation;
 
-        try{
-         response = await fetch(ENDPOINT + `fen=${fenList[i]}&depth=15`);    
-        }catch{
-            console.log("Fetch Error : " +  response)
+        try {
+            response = await fetch(ENDPOINT + `fen=${fenList[i]}&depth=15`);
+        } catch {
+            console.log("Fetch Error : " + response);
         }
         try {
             jasonation = await response.json();
@@ -39,9 +40,38 @@ export async function getEval() {
         }
         _stockFishEval.push(jasonation);
     }
-    stockFishEval = _stockFishEval
+    stockFishEval = _stockFishEval;
     console.log(fenList);
     console.log(stockFishEval);
+}
+
+export function incrementalMove(move) {
+    console.log("fetching fen");
+    try {
+     chess.move(move);
+    }catch{
+        console.log("The move : " + move + " is illegal ")
+        return ""
+    }
+    return chess.fen();
+}
+
+export async function incrementalEval(fen) {
+    let response;
+    let jasonation;
+    try {
+        response = await fetch(ENDPOINT + `fen=${fen}&depth=15`);
+    } catch {
+        console.log("Error while fetching evaluation : " + response);
+    }
+
+    try {
+        jasonation = await response.json();
+    } catch {
+        console.log("Error while converting to json : " + jasonation);
+    }
+
+    return jasonation;
 }
 
 export function getStockFish() {
